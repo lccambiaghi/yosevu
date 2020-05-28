@@ -101,8 +101,8 @@
     [:h1.text-gray-900.text-xl.leading-snug.tracking-wide
      [:a.border-b.border-transparent.hover:border-gray-900
       {:href (bidi/path-for app-routes :index)
-          :aria-label "Yosev, strange loop"}
-      "Yosevu.strange-loop"]]
+          :aria-label "Luca, strange loop"}
+      "Luca.strange-loop"]]
     [:code.text-xs.tracking-tight
      {:aria-label "Thread thoughts, read, evaluate, print"}
      "(-> thoughts read eval print)"]]

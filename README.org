@@ -1,0 +1,19 @@
+[[https://lcccambiaghi.netlify.app/][Personal blog]]
+
+* Setup
+#+BEGIN_SRC sh
+yarn install
+#+END_SRC
+* Develop
+#+BEGIN_SRC sh
+yarn develop
+#+END_SRC
+* Release
+#+BEGIN_SRC sh
+yarn release
+#+END_SRC
+
+* References
+- Implementation: https://github.com/yosevu/yosevu
+- Styling: https://code.thheller.com/
+- D3 and Clojurescript: https://lambdaisland.com/blog/26-04-2018-d3-clojurescript
