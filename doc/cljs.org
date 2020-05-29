@@ -1,0 +1,11 @@
+* Reagent
+Reagent atom defines the state, which is a map.
+When you want to access it, you need to dereference it:
+#+BEGIN_SRC clojure
+(keys @state)
+#+END_SRC
+
+#+RESULTS:
+| :posts | :current-page |
+
+You call ~r/render~ on a component, in our case the whole app
