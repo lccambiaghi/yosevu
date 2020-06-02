@@ -1,0 +1,114 @@
+* Reagent
+Reagent atom defines the state, which is a map.
+When you want to access it, you need to dereference it:
+#+BEGIN_SRC clojure
+(keys @state)
+#+END_SRC
+
+#+RESULTS:
+| :posts | :current-page |
+
+You call ~r/render~ on a component, in our case the whole app
+
+* shadow-cljs
+Cache is in ~.shadow-cljs/builds/app~. Delete the folder to clear it.
+
+To install dependencies you can run ~yarn shadow-cljs info~.
+
+In case you the server gets out of date, you can run ~yarn shadow-cljs stop~.
+
+To get ~Oz~ to work, follow the README in this repo: https://github.com/ivanminutillo/reagent-shadow-oz-example
+
+* Org export
+Use ~org-pandoc-export-as-markdown_mmd~ after narrowind to the subtree with =, s n=.
+
+* Embedding vega-lite
+** Experimenting with markdown parser
+#+BEGIN_SRC clojure
+(comment
+  (defn vega-codeblock [text {:keys [vega-codeblock vega-codeblock-end  next-line] :as state}]
+    (let [trimmed           (string/trim text)
+          next-line-closes? (= [\` \` \`] (take-last 3 (some-> next-line string/trim)))]
+      (cond
+        vega-codeblock-end
+        ;;  here spit the HTML
+        [(#'oz.core/from-markdown (:vega-md-str state))
+         (-> state
+             (assoc :last-line-empty? true)
+             (dissoc :vega-codeblock :vega-codeblock-end :vega-md-str))]
+
+        ;;  build up on vega-codeblock in state
+        (and next-line-closes? vega-codeblock)
+        [""
+         (-> state
+             (assoc :vega-codeblock-end true)
+             (update :vega-md-str #(str % text)))]
+
+        (and
+         (= [\` \` \`] (take 3 trimmed))
+         (re-find #"vega" trimmed))
+        ;;  assoc vega-codeblock in state
+        [""
+         (assoc state :vega-codeblock true :vega-md-str text)]
+
+        vega-codeblock
+        ;;  build up on vega-codeblock in state
+        ["" (update state :vega-md-str #(str % text))]
+
+        :default
+        [text state])))
+
+  (md-to-html-string (slurp "vega-lite-clj.md")
+                     :replacement-transformers (into [vega-codeblock] transformer-vector))
+
+  (md-to-html-string (slurp "src/posts/vega-lite-clj.md"))
+
+  (#'oz.core/from-markdown (slurp "vega-lite-clj.md"))
+
+  (let [state (assoc {} :vega-md-str "a")]
+    (update state :vega-md-str #(str % "b"))
+    )
+
+
+  )
+#+END_SRC
+** From javascript
+https://github.com/vega/vega-embed
+
+https://bl.ocks.org/domoritz/455e1c7872c4b38a58b90df0c3d7b1b9
+
+** With iframe
+#+BEGIN_SRC html
+<iframe src="vega-embed.html" style="overflow:visible;min-height:600px;height:100%;width:100%;padding:20px" scrolling="no" border="none" width="100%" height="100%" marginheight="0" frameborder="0"></iframe>
+#+END_SRC
+
+Learnings:
+- If you use ~srcdoc~, replace ~"~ with ~&quot;~
+- Set ~minheight~ to avoid cutting off the plot
+  - 500x500 is too big
+- Set padding
+
+Responsive iframe:
+#+BEGIN_SRC html
+<div class="iframe-container"><iframe src="vega-embed.html"></iframe></div>
+#+END_SRC
+
+#+begin_src css
+.resp-container {
+    position: relative;
+    overflow: visible;
+    padding-top: 56.25%;
+}
+
+.resp-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+#+end_src
+
+** Centering image
+https://html-online.com/articles/image-align-center/
