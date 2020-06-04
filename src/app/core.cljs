@@ -117,7 +117,7 @@
     "(-> thoughts read eval print)"]])
 
 (defn app []
-  [:div.container.mx-auto.max-w-2xl.m-4.p-4.mt-10.text-gray-900
+  [:div.container.mx-auto.max-w-4xl.m-4.p-4.mt-10.text-gray-900
    [header]
    (pages current-page)])
 

@@ -1,4 +1,5 @@
 * Reagent
+** State
 Reagent atom defines the state, which is a map.
 When you want to access it, you need to dereference it:
 #+BEGIN_SRC clojure
@@ -8,7 +9,18 @@ When you want to access it, you need to dereference it:
 #+RESULTS:
 | :posts | :current-page |
 
+** Component
 You call ~r/render~ on a component, in our case the whole app
+
+** Styling
+On an HTML element, you can set attributes by creating a map:
+#+BEGIN_SRC clojure
+[:a.border-b.border-transparent.hover:border-gray-900
+ {:href       (bidi/path-for app-routes :about)
+  :aria-label "about"
+  :style      {:float "right"}}
+ "about"]
+#+END_SRC
 
 * shadow-cljs
 Cache is in ~.shadow-cljs/builds/app~. Delete the folder to clear it.
@@ -112,3 +124,20 @@ Responsive iframe:
 
 ** Centering image
 https://html-online.com/articles/image-align-center/
+* Tailwind CSS
+** Max width
+#+BEGIN_SRC clojure
+[:div.container.max-w-4xl]
+#+END_SRC
+** Escape /
+Probably you need to escape backslash in clj. The result would be:
+#+BEGIN_SRC clojure
+[:div.container.aspect-ratio-16\/9]
+#+END_SRC
+** Response embed
+You need both classes:
+#+BEGIN_SRC html
+<div class="embed-responsive aspect-ratio-4/3">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/J---aiyznGQ"></iframe>
+</div>
+#+END_SRC
