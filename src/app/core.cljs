@@ -13,24 +13,28 @@
 ;; Routes
 
 (def app-routes
-  ["/" {"" :index
-        ["" :post-id] :post
+  ["/" {""               :index
+        "about"          :about
+        ["" :post-id]    :post
         ["tag/" :tag-id] :tag
-        true :not-found}])
+        true             :not-found}])
 
 (defn current-page []
   (:current-page @state))
 
 ;; Views
+(defn about []
+  [:div.mt-12
+   [:p "About Luca Cambiaghi"]])
 
 (defn tag-template [tag]
   [:a.text-blue-600.text-sm.t.ml-3.border-b.border-transparent.hover:border-blue-600
-   {:key tag
+   {:key  tag
     :href (bidi/path-for
-                   app-routes
-                   :tag
-                   :tag-id
-                   tag)}
+           app-routes
+           :tag
+           :tag-id
+           tag)}
    tag])
 
 (defn tags [post]
@@ -88,24 +92,33 @@
 (defn pages [path]
   (case (:handler (:current-page @state))
     :index [index (:posts @state)]
-    :post [post (:post-id (:route-params (:current-page @state)))]
-    :tag [index (filter-by-tag (:posts @state) (:tag-id (:route-params (:current-page @state))))]
+    :about [about]
+    :post  [post (:post-id (:route-params (:current-page @state)))]
+    :tag   [index (filter-by-tag (:posts @state) (:tag-id (:route-params (:current-page @state))))]
     [not-found]))
 
 (defn set-page! [match]
   (swap! state assoc :current-page match))
 
+(defn header []
+  [:header
+   [:h1.text-gray-900.text-xl.leading-snug.tracking-wide
+    [:a.border-b.border-transparent.hover:border-gray-900
+     {:href       (bidi/path-for app-routes :index)
+      :aria-label "Luca"}
+     "Luca"]
+    [:a.border-b.border-transparent.hover:border-gray-900
+     {:href       (bidi/path-for app-routes :about)
+      :aria-label "about"
+      :style      {:float "right"}}
+     "about"]]
+   [:code.text-xs.tracking-tight
+    {:aria-label "Thread thoughts, read, evaluate, print"}
+    "(-> thoughts read eval print)"]])
+
 (defn app []
   [:div.container.mx-auto.max-w-2xl.m-4.p-4.mt-10.text-gray-900
-   [:header
-    [:h1.text-gray-900.text-xl.leading-snug.tracking-wide
-     [:a.border-b.border-transparent.hover:border-gray-900
-      {:href (bidi/path-for app-routes :index)
-          :aria-label "Luca, strange loop"}
-      "Luca.strange-loop"]]
-    [:code.text-xs.tracking-tight
-     {:aria-label "Thread thoughts, read, evaluate, print"}
-     "(-> thoughts read eval print)"]]
+   [header]
    (pages current-page)])
 
 (def history
