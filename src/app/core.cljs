@@ -5,7 +5,7 @@
             [pushy.core :as pushy]
             [reagent.core :as r]
             [goog.string :as gstring]
-            ["dangerously-set-html-content" :as InnerHTML]
+            ["hyvor-talk-react" :as HyvorTalk]
             ["highlight.js" :as hljs]))
 
 ;; State
@@ -27,8 +27,7 @@
 ;; Views
 (defn about []
   [:div.mt-12
-   [:p "About Luca Cambiaghi"]
-   ])
+   [:p "About Luca Cambiaghi"]])
 
 (defn tag-template [tag]
   [:a.text-blue-600.text-sm.t.ml-3.border-b.border-transparent.hover:border-blue-600
@@ -71,19 +70,8 @@
     (doseq [block (array-seq (.querySelectorAll (r/dom-node node) "pre code"))]
       (.highlightBlock hljs block))))
 
-(defn comments [post-id]
-  (let [html-str (gstring/format "
-      <div id=\"hyvor-talk-view\"></div>
-      <script type=\"text/javascript\">
-          var HYVOR_TALK_WEBSITE = 793; // DO NOT CHANGE THIS
-          var HYVOR_TALK_CONFIG = {
-              url: \"https://cambiaghi.me\",
-              id: \"%s\"
-          };
-      </script>
-      <script async type=\"text/javascript\" src=\"//talk.hyvor.com/web-api/embed\"></script>
-      " post-id)]
-    [:> InnerHTML {:html html-str}]))
+(defn- comments [post-id]
+  [:> HyvorTalk/Embed {:websiteId 793 :id post-id :loadMode "scroll"}])
 
 (defn post [post-id]
   (r/create-class
