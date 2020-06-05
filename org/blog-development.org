@@ -1,4 +1,6 @@
 * Reagent
+https://github.com/reagent-project/reagent/blob/master/doc/CreatingReagentComponents.md
+
 ** State
 Reagent atom defines the state, which is a map.
 When you want to access it, you need to dereference it:
@@ -10,16 +12,44 @@ When you want to access it, you need to dereference it:
 | :posts | :current-page |
 
 ** Component
-You call ~r/render~ on a component, in our case the whole app
+You call ~r/render~ on a component:
+#+BEGIN_SRC clojure
+(r/render [app]
+            (.getElementById js/document "app"))
+#+END_SRC
+In this case we render the component function [app] within the element with ID "app".
+
+A component is just a function containing some HTML defined with a hiccup-like syntax.
+It can be called both with rounded and square brackets but square brackets will be smart about re-rendering.
+
+A component function can return another function used to render the component:
+#+BEGIN_SRC clojure
+(defn timer-component []
+  (let [seconds-elapsed (r/atom 0)]
+    (fn []
+      (js/setTimeout #(swap! seconds-elapsed inc) 1000)
+      [:div
+       "Seconds Elapsed: " @seconds-elapsed])))
+#+END_SRC
 
 ** Styling
-On an HTML element, you can set attributes by creating a map:
+Hiccup uses vectors to represent HTML elements, and maps to represent an element's attributes.
 #+BEGIN_SRC clojure
-[:a.border-b.border-transparent.hover:border-gray-900
- {:href       (bidi/path-for app-routes :about)
-  :aria-label "about"
-  :style      {:float "right"}}
- "about"]
+[:div {:style {:background "blue"}} "hello " "there"]
+#+END_SRC
+** React
+You can define a React Fragment with the keyword :<> and columns with keyword :td:
+#+BEGIN_SRC clojure
+(defn columns
+  []
+  [:<>
+    [:td "Hello"]
+    [:td "World"]]
+#+END_SRC
+** Javascript interop
+#+BEGIN_SRC clojure
+(set! (.-title js/document) "dynamic title")
+
 #+END_SRC
 
 * shadow-cljs
@@ -141,3 +171,9 @@ You need both classes:
   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/J---aiyznGQ"></iframe>
 </div>
 #+END_SRC
+* Netlify functions
+Example project with shadow-clj compiling functions to js:
+https://github.com/thheller/netlify-cljs/blob/master/shadow-cljs.edn
+
+Example project with netlify forms + functions:
+https://github.com/healeycodes/gatsby-serverless-comments

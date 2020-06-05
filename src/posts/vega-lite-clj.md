@@ -166,5 +166,3 @@ Executing `yarn develop` starts the `shadow-cljs` server which will watch for ch
 At the same time it will expose a Clojure REPL that I can connect to in order to execute my org src blocks.
 When I am satisfied, I can just export to markdown and see the blog post reloading.
 
-<div id="hyvor-talk-view" class="container mx-auto"></div> <script type="text/javascript"> var HYVOR_TALK_WEBSITE = 793; var HYVOR_TALK_CONFIG = {url: https://cambiaghi.me/vega-lite-clj, id: vega-lite-clj}; </script> <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-

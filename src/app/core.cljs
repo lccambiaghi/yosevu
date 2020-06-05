@@ -4,6 +4,8 @@
             [clojure.string :refer [split]]
             [pushy.core :as pushy]
             [reagent.core :as r]
+            [goog.string :as gstring]
+            ["dangerously-set-html-content" :as InnerHTML]
             ["highlight.js" :as hljs]))
 
 ;; State
@@ -25,7 +27,8 @@
 ;; Views
 (defn about []
   [:div.mt-12
-   [:p "About Luca Cambiaghi"]])
+   [:p "About Luca Cambiaghi"]
+   ])
 
 (defn tag-template [tag]
   [:a.text-blue-600.text-sm.t.ml-3.border-b.border-transparent.hover:border-blue-600
@@ -68,6 +71,20 @@
     (doseq [block (array-seq (.querySelectorAll (r/dom-node node) "pre code"))]
       (.highlightBlock hljs block))))
 
+(defn comments [post-id]
+  (let [html-str (gstring/format "
+      <div id=\"hyvor-talk-view\"></div>
+      <script type=\"text/javascript\">
+          var HYVOR_TALK_WEBSITE = 793; // DO NOT CHANGE THIS
+          var HYVOR_TALK_CONFIG = {
+              url: \"https://cambiaghi.me\",
+              id: \"%s\"
+          };
+      </script>
+      <script async type=\"text/javascript\" src=\"//talk.hyvor.com/web-api/embed\"></script>
+      " post-id)]
+    [:> InnerHTML {:html html-str}]))
+
 (defn post [post-id]
   (r/create-class
    {:component-did-mount highlight-block
@@ -82,7 +99,8 @@
           [:time.text-sm.tracking-wide.mt-px (first (:date (:metadata ((keyword post-id) (:posts @state)))))]
           (tags ((keyword post-id) (:posts @state)))]
          [:article.markdown.mt-6
-          {:dangerouslySetInnerHTML {:__html (:html ((keyword post-id) (:posts @state)))}}]]))}))
+          {:dangerouslySetInnerHTML {:__html (:html ((keyword post-id) (:posts @state)))}}]
+         [comments post-id]]))}))
 
 (defn filter-by-tag [posts tag-id]
   (filter #(re-find (re-pattern tag-id) (first (:tags (:metadata (val %))))) posts))
@@ -100,6 +118,7 @@
 (defn set-page! [match]
   (swap! state assoc :current-page match))
 
+;; App
 (defn header []
   [:header
    [:h1.text-gray-900.text-xl.leading-snug.tracking-wide
@@ -116,10 +135,15 @@
     {:aria-label "Thread thoughts, read, evaluate, print"}
     "(-> thoughts read eval print)"]])
 
+(defn footer []
+  [:div
+   [:iframe {:src "html/predict-bw.html" :frame-border "0" :scrolling "no" :width "100%" :height "300"}]])
+
 (defn app []
   [:div.container.mx-auto.max-w-4xl.m-4.p-4.mt-10.text-gray-900
    [header]
-   (pages current-page)])
+   (pages current-page)
+   [footer]])
 
 (def history
   (pushy/pushy set-page! (partial bidi/match-route app-routes)))
