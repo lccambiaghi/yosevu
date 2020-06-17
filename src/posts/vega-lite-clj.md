@@ -1,6 +1,6 @@
 title: Vega-lite in Clojure
 subtitle: How to write visualizations as code
-date: 2020-06-2
+date: 2020-06-02
 id: vega-lite-clj
 tags: vega-lite clojure
 

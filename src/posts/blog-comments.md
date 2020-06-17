@@ -1,6 +1,6 @@
 title: Adding comments to the blog
 subtitle: The simple, privacy-focused, not bloated way
-date: 2020-06-7
+date: 2020-06-07
 id: blog-comments
 tags: clojurescript react
 

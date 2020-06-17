@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/46ffadee-bc22-4274-bc6f-00392df3a2a1/deploy-status)](https://app.netlify.com/sites/lccambiaghi/deploys)
+
 [[https://lcccambiaghi.netlify.app/][Personal blog]]
 
 * Setup
