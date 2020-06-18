@@ -108,7 +108,7 @@ Note that the code block has certain `header args`:
 They set the result to be a link to the path where the plot will be saved.
 
 
-# Clojure is closer to metal
+# Clojer to metal
 
 Reading this book with this setup is a lot of fun.
 I usually have the .pdf open on the right and Emacs on the left.
@@ -138,8 +138,26 @@ This means that I can derive my building blocks as functions and very quickly co
 Again, not a slave of `matplotlib` APIs: subplots, xticks formatters and so on.
 Visualizations as data.
 
-Apart from this super cool libraries, I am gaining confidence with the language.
+Here is a snippet demonstrating `tablecloth` and `vega-lite` layers:
+
+    (defn weight-vs-height-mapseq [ds rank]
+      (-> (ds/select-columns ds ["htm3" "wtkg2"])
+          (dss/drop-missing ["htm3"])
+          (dss/select-rows (fn [row] (and (> (row "htm3") 135) (< (row "htm3") 200))))
+          (dss/group-by (fn [row] (dfn/round (dfn// (row "htm3") 5))))
+          (dss/aggregate {:mean-height       #(dfn/mean (% "htm3"))
+                          :weight-percentile #(percentile ((dss/drop-missing % "wtkg2") "wtkg2") rank)} )
+          (ds/mapseq-reader)))
+    
+    (let [specs (for [[rank color] [[25 "blue"] [50 "green"] [75 "red"]]]
+                  (line-spec (weight-vs-height-mapseq brfss rank) :x-field :mean-height :y-field :weight-percentile :mark-color color))]
+      (plot-spec  {:layer (into [] specs)}))
+
+<img src="resources/weight-vs-height.png" alt="Editing org source blocks" style="float: center" />
+
+Apart from these super cool libraries, I am gaining confidence with the language.
 I am solving problems faster, writing more idiomatic code (I like to refactor days-old code, extracting pure functions), getting comfortable with the tooling.
+I like the idea that these pure functions are forever added to my toolbox, ready to be applied to other problems and domains.
 
 
 # Conclusion
