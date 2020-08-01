@@ -9,7 +9,8 @@
   [kibu/pushy "0.3.8"]
   [metasoarous/oz "1.6.0-alpha2"]
   [markdown-clj "1.10.0"]
-  [reagent "0.9.0-rc3"]]
+  [reagent "0.9.0-rc3"]
+  [quil "3.1.0"]]
 
  :nrepl
  {:port 3333}

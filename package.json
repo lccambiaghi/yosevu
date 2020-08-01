@@ -23,6 +23,7 @@
   "dependencies": {
     "highlight.js": "^9.17.1",
     "hyvor-talk-react": "^1.0.1",
+    "p5": "^1.1.9",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",

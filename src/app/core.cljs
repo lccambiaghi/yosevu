@@ -1,5 +1,6 @@
 (ns app.core
   (:require [app.resource :as rc]
+            [app.rain :refer [canvas]]
             [bidi.bidi :as bidi]
             [clojure.string :refer [split]]
             [pushy.core :as pushy]
@@ -26,8 +27,9 @@
 
 ;; Views
 (defn about []
-  [:div.mt-12
-   [:p "About Luca Cambiaghi"]])
+  ;; [:div.mt-12
+  ;;  [:p "About Luca Cambiaghi"]]
+  (canvas))
 
 (defn tag-template [tag]
   [:a.text-blue-600.text-sm.t.ml-3.border-b.border-transparent.hover:border-blue-600
