@@ -1,8 +1,15 @@
 #+OPTIONS: num:nil toc:nil \n:nil author:nil date:nil title:nil
 
+* About Me
+:PROPERTIES:
+:EXPORT_FILE_NAME: ../src/about.md
+:END:
+
+Blablabla
+
 * New website!
 :PROPERTIES:
-:EXPORT_FILE_NAME: src/posts/new-website.md
+:EXPORT_FILE_NAME: ../src/posts/new-website.md
 :END:
 title: New website!
 subtitle: Why and how I set up my personal website
@@ -488,3 +495,26 @@ This post has briefly touched some topics and technologies that are really inter
 I barely scratched the topic of literature programming but I was glad to experiment with one of its use cases.
 I will write another post in the future which showcases some other cool features such as weaving and tangling.
 I hope that somebody can learn from the approach that I shared and maybe can suggest improvements to this workflow!
+* React Native from Clojurescript
+:PROPERTIES:
+:EXPORT_FILE_NAME: ../src/posts/react-native-cljs.md
+:END:
+title: React Native from Clojurescript
+subtitle: Develop native mobile apps in the most elegant way
+date: 2020-06-17
+id: react-native-cljs
+tags: clojure clojurescript reagent react-native
+** React Native
+- Introduce
+- Expo
+- Simulator
+** Figwheel
+- Tried Krell, tried shadow
+- Show your config
+** Reagent
+- Link to rrn
+- Example simple conversion
+- Custom conversion
+** Calling clojure
+- experiment in clj, then export to cljs
+- Screenshot of result

@@ -16,3 +16,6 @@
 
 (defmacro get-posts [path]
   (reduce into-map {} (sort-by-date (md->html (slurp-dir path)))))
+
+(defmacro get-about-html [path]
+  (md-to-html-string-with-meta (slurp (io/file path))))

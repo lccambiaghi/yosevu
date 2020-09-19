@@ -27,9 +27,11 @@
 
 ;; Views
 (defn about []
-  ;; [:div.mt-12
-  ;;  [:p "About Luca Cambiaghi"]]
-  (canvas))
+  [:div.mt-12
+   [:article.markdown.mt-6
+    {:dangerouslySetInnerHTML {:__html (:html (rc/get-about-html "src/about.md"))}}]
+   ;; [:> (canvas)]
+   ])
 
 (defn tag-template [tag]
   [:a.text-blue-600.text-sm.t.ml-3.border-b.border-transparent.hover:border-blue-600
