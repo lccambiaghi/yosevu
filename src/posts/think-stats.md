@@ -32,9 +32,9 @@ A code block looks like this:
       (reduce + vec))
     #+END_SRC
 
-It seems verbose to specify +BEGIN<sub>SRC</sub> and +END<sub>SRC</sub> everytime compared to, for example, markdown.
+It seems verbose to specify `#+BEGIN_SRC` and `#END_SRC` everytime compared to, for example, markdown.
 The process can be quickly automated and it is in fact a built-in feature:
-just typing `<s` and pressing TAB will expand the \_s<sub>ource</sub> block and move the cursor for you so that you can type the language.
+just typing `<s` and pressing TAB will expand the source block and move the cursor for you so that you can type the language.
 Another TAB will bring the cursor inside the block.
 
 Syntax highlighting inside the block is easy to achieve.
