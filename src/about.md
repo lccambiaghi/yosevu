@@ -7,11 +7,15 @@ In 2016 I moved to Copenhagen to achieve my MSc in Computer Science.
 
 My favourite hobby is travelling.
 After my graduation I spent 3 months backpacking across Chile, Bolivia, Peru and Colombia.
-Another beautiful trip I have done was my backpacking trip to Nepal and India.
+Another beautiful backpacking trip I have done was when visiting Nepal and India.
 
 I also love reading and watching good movies and TV show.
 The last book I read was &ldquo;12 rules for life&rdquo; by Jordan Peterson.
 The last TV show I (re)watched was Breaking Bad.
+
+You can contact me by email at
+
+<span style="cursor: pointer" onclick="this.textContent = ('luca.cambiaghi' + '@me' + String.fromCharCode(46) + 'com'); this.onclick = null; this.style.cursor='default'">(click.here.or.see.resume)</span>
 
 
 # What I do
@@ -21,6 +25,8 @@ My team is responsible for providing users with hundreds of thousand of time ser
 
 I have experience in developing real world, scalable machine learning pipelines.
 I am skilled in big data ingestion and cleaning, feature engineering, model development, deployment and monitoring.
+
+Here you can see my full [Resume](https://luca.cambiaghi.me.com/resume.pdf).
 
 
 # How I do it
