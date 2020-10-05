@@ -20,6 +20,7 @@
         "about"          :about
         ["" :post-id]    :post
         ["tag/" :tag-id] :tag
+        "resume"         :resume
         true             :not-found}])
 
 (defn current-page []
@@ -105,6 +106,7 @@
     :about [about]
     :post  [post (:post-id (:route-params (:current-page @state)))]
     :tag   [index (filter-by-tag (:posts @state) (:tag-id (:route-params (:current-page @state))))]
+    :resume "https://luca.cambiaghi.me.com/resume.pdf"
     [not-found]))
 
 (defn set-page! [match]
