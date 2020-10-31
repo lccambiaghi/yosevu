@@ -23,14 +23,14 @@ I can do this by having this property at the top of `setup.org`:
 
 This is the structure of the document:
 
-    - macOs settings
-    - brew
-    - zsh
-    - fonts
-    - cli
-    - gui
-    - dotfiles
-    - execute all
+    * macOs settings
+    * brew
+    * zsh
+    * fonts
+    * cli
+    * gui
+    * dotfiles
+    * execute all
 
 In each section I have a `sh` code block. This is an example block from
 the "gui" section:
@@ -40,10 +40,8 @@ the "gui" section:
         BASE_APPS="google-chrome amethyst slack visual-studio-code firefox iterm2 iina menumeters 1password6 qbitorrent private-internet-access"
         brew tap homebrew/cask-versions
         brew cask install $BASE_APPS
-
         echo "Installing: docker"
         brew cask install docker
-
         echo "Installing: corporate"
         CORPORATE="microsoft-office keybase microsoft-azure-storage-explorer intune-company-portal microsoft-teams"
         brew cask install $CORPORATE

@@ -848,14 +848,14 @@ I can do this by having this property at the top of ~setup.org~:
 
 This is the structure of the document:
 #+begin_example
-- macOs settings
-- brew
-- zsh
-- fonts
-- cli
-- gui
-- dotfiles
-- execute all
+ * macOs settings
+ * brew
+ * zsh
+ * fonts
+ * cli
+ * gui
+ * dotfiles
+ * execute all
 #+end_example
 
 In each section I have a ~sh~ code block.
@@ -866,10 +866,8 @@ install_apps() {
     BASE_APPS="google-chrome amethyst slack visual-studio-code firefox iterm2 iina menumeters 1password6 qbitorrent private-internet-access"
     brew tap homebrew/cask-versions
     brew cask install $BASE_APPS
-
     echo "Installing: docker"
     brew cask install docker
-
     echo "Installing: corporate"
     CORPORATE="microsoft-office keybase microsoft-azure-storage-explorer intune-company-portal microsoft-teams"
     brew cask install $CORPORATE
@@ -930,3 +928,16 @@ I have achieved full reproducibility when it comes to my IDE.
 Next step is my full computing environment.
 That is why I am now looking at ~nix~ and ~home-manager~.
 Expect a blog post about it in the near future!
+* Nix, the functional package manager
+:PROPERTIES:
+:EXPORT_FILE_NAME: ../src/posts/nix-package-manager.md
+:END:
+title: Nix, the functional package manager\\
+subtitle: Declare your software and dotfiles and make them portable\\
+date: 2020-10-31\\
+tags: nix home-manager\\
+id: nix-package-manager
+
+** Why should you care?
+** Installing Nix
+** Home Manager
