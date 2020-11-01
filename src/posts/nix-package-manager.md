@@ -1,6 +1,5 @@
 title: Nix, the functional package manager  
-subtitle: Declare your software and dotfiles and make them reproducible
-forever  
+subtitle: Declare your software and dotfiles and make them reproducible forever  
 date: 2020-11-01  
 tags: nix home-manager  
 id: nix-package-manager
