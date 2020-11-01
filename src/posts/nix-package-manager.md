@@ -94,7 +94,7 @@ After the restart, we can set the volume as read-only:
 
     sudo chown -R $(whoami) /nix
 
-And install `nix`:
+And install `nix`: z
 
     sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
 
@@ -192,7 +192,7 @@ The main thing to consider is the `home.nix` file:
 
 Start by inserting your username and home directory.
 
-Now you can run the helper commands available in the repo:
+Now you can run the helper commands available in the repo: z
 
     ./update-dependencies.sh
     ./switch.sh
@@ -201,7 +201,7 @@ When the process completes, start a new shell. If you didn't have it
 before, you have installed `htop` and can use it in your terminal.
 
 It also installed another `bash` executable. You can see all executables
-with `which -a`:
+with `which -a`: z
 
     ~ ❯ which -a bash
     /Users/luca/.nix-profile/bin/bash

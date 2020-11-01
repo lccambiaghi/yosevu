@@ -990,61 +990,74 @@ We are not doing anything dramatic and if something goes wrong we can easily del
 For reference, I followed [[https://www.philipp.haussleiter.de/2020/04/fixing-nix-setup-on-macos-catalina/][this]] and [[https://dubinets.io/installing-nix-on-macos-catalina/][this]] blog posts.
 
 First we create the volume with the ~diskutil~ program:
+
 #+BEGIN_SRC sh
 sudo diskutil apfs addVolume disk1 ‘APFS’ nix
 #+END_SRC
 
 Then we need to ask ~diskutil~ for the ~UUID~ of our volume:
+
 #+BEGIN_SRC sh
 diskutil info /dev/disk1s6 | grep UUID
 #+END_SRC
 
 Let's copy that information and paste it in the below command:
+
 #+begin_src sh
 echo "UUID=12345678-1234-1234-1234-123456789123 /nix apfs  rw" | sudo tee -a /etc/fstab
 #+end_src
 
 Finally, let's edit the ~/etc/synthetic.conf~ file:
+
 #+BEGIN_SRC sh
 echo 'nix' | sudo tee -a /etc/synthetic.conf
 #+END_SRC
+
 and restart.
 
 *** Iinstall ~nix~
 After the restart, we can set the volume as read-only:
+
 #+BEGIN_SRC sh
 sudo chown -R $(whoami) /nix
 #+END_SRC
 
 And install ~nix~:
+z
 #+BEGIN_SRC sh
 sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
 #+END_SRC
 
 The installer is pretty straightforward.
 To test that the installation went through, try a ~nix-shell~ command:
+
 #+BEGIN_SRC sh
 nix-shell -p ripgrep
 #+END_SRC
+
 If everything went well, congratulations!
 Else, head over to the Troubleshooting section.
 
 *** Install ~nix-darwin~
 In order for ~nix~ to control some of the system services of ~macOS~, we need to install ~nix-darwin~.
+
 #+BEGIN_SRC sh
 nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 #+END_SRC
 
 And execute the built installer:
+
 #+BEGIN_SRC sh
 ./result/bin/darwin-installer
 #+END_SRC
 
 Finally, let's add the ~nixpkgs~ channel:
+
 #+begin_src sh
 sudo -i nix-channel --add https://nixos.org/channels/nixpkgs-20.09-darwin nixpkgs
 sudo -i nix-channel --update nixpkgs
 #+end_src
+
 A channel is simply a repository where ~nix~ will look for downloads.
 [[https://github.com/NixOS/nixpkgs][Here]] you can find the repository with the "recipe" for all the packages.
 Once you gained confidence with the ~nix~ language, it is easy to write a recipe for a package and contribute it to the community.
@@ -1057,17 +1070,20 @@ In case the ~nix~ commands are not available to your path:
 - Next, check that your ~.nix-profile~ is populated.
 
 In my case, it was empty and I had to create the symlink myself with:
+
 #+BEGIN_SRC sh
 ln -s /nix/var/nix/profiles/default/bin .nix-profile
 #+END_SRC
 
 And then switching profile:
+
 #+BEGIN_SRC sh
 nix-env --switch-profile /nix/var/nix/profiles/per-user/$USER/profile
 #+END_SRC
 
 I faced another couple of misteryous errors when installing ~nix-darwin~, solved by exporting environment variables as indicated in some remote github issues.
 Export them and run the commands again:
+
 #+BEGIN_SRC sh
 export NIX_SSL_CERT_FILE="/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt"
 export NIX_PATH=~/.nix-defexpr/channels:$NIX_PATH
@@ -1085,6 +1101,7 @@ I recommend to start by cloning [[https://github.com/ryantm/home-manager-templat
 It contains a great template that you can start customizing right away.
 
 The main thing to consider is the ~home.nix~ file:
+
 #+BEGIN_SRC nix
 { pkgs, ... }:
 
@@ -1109,6 +1126,7 @@ The main thing to consider is the ~home.nix~ file:
 Start by inserting your username and home directory.
 
 Now you can run the helper commands available in the repo:
+z
 #+BEGIN_SRC sh
 ./update-dependencies.sh
 ./switch.sh
@@ -1119,6 +1137,7 @@ If you didn't have it before, you have installed ~htop~ and can use it in your t
 
 It also installed another ~bash~ executable.
 You can see all executables with ~which -a~:
+z
 #+BEGIN_SRC sh
 ~ ❯ which -a bash
 /Users/luca/.nix-profile/bin/bash
@@ -1131,12 +1150,14 @@ When you ran ~switch~, ~nix~ downloaded the declared packages and symlinked the 
 
 This is great because you can slowly migrate your ~brew~ packages.
 And if something goes wrong, you can rollback to the previously built configuration with:
+
 #+BEGIN_SRC sh
 nix-env --rollback
 #+END_SRC
 
 In fact, I accepted that on ~macOS~ my ~home-manager~ configuration will live algonside a ~Brewfile~ to install ~GUI~ apps (~brew cask~ is much more stable and furnished).
 Restoring my system will just amount to:
+
 #+BEGIN_SRC sh
 ./update-dependencies.sh
 ./switch.sh
@@ -1146,6 +1167,7 @@ brew bundle
 #+END_SRC
 
 and this is an extract of my ~Brewfile~:
+
 #+BEGIN_SRC sh
 # Taps
 tap "homebrew/cask"
