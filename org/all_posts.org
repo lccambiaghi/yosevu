@@ -1104,22 +1104,18 @@ The main thing to consider is the ~home.nix~ file:
 
 #+BEGIN_SRC nix
 { pkgs, ... }:
-
 {
   home.username = "$USER";
   home.homeDirectory = "$HOME";
-
   home.stateVersion = "20.09";
-
+  #
   programs.bash = {
     enable = true;
   };
-
   home.packages = [
     pkgs.htop
     pkgs.fortune
   ];
-
 }
 #+END_SRC
 

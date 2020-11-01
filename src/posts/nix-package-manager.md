@@ -172,22 +172,18 @@ contains a great template that you can start customizing right away.
 The main thing to consider is the `home.nix` file:
 
     { pkgs, ... }:
-
     {
       home.username = "$USER";
       home.homeDirectory = "$HOME";
-
       home.stateVersion = "20.09";
-
+      #
       programs.bash = {
         enable = true;
       };
-
       home.packages = [
         pkgs.htop
         pkgs.fortune
       ];
-
     }
 
 Start by inserting your username and home directory.
