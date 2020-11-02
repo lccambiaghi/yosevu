@@ -21,8 +21,7 @@ One weekend, almost joking, I downloaded vanilla Emacs and I followed
 the tutorial.
 
 Maaan, these weird keybindings. Now I know that Emacs has been developed
-before the [Common User
-Access](https://www.ibm.com/support/knowledgecenter/SSLTBW_2.1.0/com.ibm.zos.v2r1.f54dg00/cuahlp.htm)
+before the [Common User Access](https://www.ibm.com/support/knowledgecenter/SSLTBW_2.1.0/com.ibm.zos.v2r1.f54dg00/cuahlp.htm)
 guidelines were designed. Its philoshopy allows the user to change
 keybindings to whatever you expect from it but it won't suggest it to
 you\!

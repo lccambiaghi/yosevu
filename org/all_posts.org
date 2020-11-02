@@ -943,7 +943,7 @@ I recently had to restore my Mac, as I covered in my previous blog post.
 I have now experienced what it is to start from scratch and have a software configure your new OS.
 
 It was liberating to think that next time it would take me less than an hour to get up to speed.
-This is called having a *portable configuration*.
+This is called having a portable configuration.
 Of course, the solution I described was not portable, actually limited to macOS.
 
 I spent the past week or so learning about Nix.

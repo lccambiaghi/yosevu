@@ -12,8 +12,8 @@ I have now experienced what it is to start from scratch and have a
 software configure your new OS.
 
 It was liberating to think that next time it would take me less than an
-hour to get up to speed. This is called having a **portable
-configuration**. Of course, the solution I described was not portable,
+hour to get up to speed. This is called having a *portable
+configuration*. Of course, the solution I described was not portable,
 actually limited to macOS.
 
 I spent the past week or so learning about Nix. Nix is a functional
@@ -64,9 +64,7 @@ cool feature is that we will be able to roll-back to previous
 We will issue a few commands at the terminal. We are not doing anything
 dramatic and if something goes wrong we can easily delete the volume
 with Disk Utility and start the process from the beginning. For
-reference, I followed
-[this](https://www.philipp.haussleiter.de/2020/04/fixing-nix-setup-on-macos-catalina/)
-and [this](https://dubinets.io/installing-nix-on-macos-catalina/) blog
+reference, I followed [this](https://www.philipp.haussleiter.de/2020/04/fixing-nix-setup-on-macos-catalina/) and [this](https://dubinets.io/installing-nix-on-macos-catalina/) blog
 posts.
 
 First we create the volume with the `diskutil` program:
@@ -257,5 +255,4 @@ Some of the great tools to learn about:
 -   We have seen `nix-env` in action with `home-manager`. It is used for
     managing system configuration.
 
-I will just end with a link to my personal `nixpkgs` repo which holds
-[my home configuration](https://github.com/lccambiaghi/nixpkgs).
+I will just end with a link to my personal `nixpkgs` repo which holds [my home configuration](https://github.com/lccambiaghi/nixpkgs).
