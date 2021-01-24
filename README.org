@@ -14,6 +14,10 @@ yarn develop
 #+BEGIN_SRC sh
 yarn release
 #+END_SRC
+* Things to improve
+- Exporting from ~org~ to ~md~ has some issues:
+  1. When using ~ox-md~ the source of the code blocks is not recognized.
+  2. When using ~ox-md-gfm~ the title metadata needs backslash for newline, plus the links sometimes get line broken and therefore fail to render
 
 * References
 - Implementation: https://github.com/yosevu/yosevu

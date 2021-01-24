@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "export NODE_ENV=production && postcss src/css/main.css -o public/css/main.css",
+    "deps": "shadow-cljs info",
     "watch:css": "postcss src/css/main.css -o public/css/main.css --watch",
     "watch:shadow": "shadow-cljs watch app",
     "develop": "yarn run-p watch:css watch:shadow",
