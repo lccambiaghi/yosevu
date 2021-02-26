@@ -1,6 +1,8 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/46ffadee-bc22-4274-bc6f-00392df3a2a1/deploy-status)](https://app.netlify.com/sites/lccambiaghi/deploys)
 
-[[https://lcccambiaghi.netlify.app/][Personal blog]]
+[[https://luca--lccambiaghi.netlify.app][(old) personal blog]]
+
+Moved to [[https://luca.cambiaghi.me][this new URL]] and [[https://github.com/lccambiaghi/lccambiaghi.github.io][this new setup]]
 
 * Setup
 #+BEGIN_SRC sh
